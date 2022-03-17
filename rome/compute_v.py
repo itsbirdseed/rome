@@ -199,9 +199,9 @@ def compute_v(
     )
 
     # Solving the linear system to compute the right vector
-    right_vector = (target - current) / torch.dot(x, left_vector)
+    right_vector = (target - current) / torch.dot(x.float(), left_vector)
     print(f"Representation norm delta: {(target - current).norm().item()}")
-    print(f"Division Factor: {torch.dot(x, left_vector).item()}")
+    print(f"Division Factor: {torch.dot(x.float(), left_vector).item()}")
 
     # Clamping hack to avoid catastrophe
     right_vector *= min(right_vector.norm().item(), MAX_NORM) / right_vector.norm()
